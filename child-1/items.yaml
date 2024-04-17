@@ -41,3 +41,14 @@ items:
     disabled: false
     displayName: "Pipeline Test"
     resumeBlocked: false
+  - kind: "cloudbeesTemplatedJob"
+    name: "hello-world-test"
+    catalog: "timPlateCatalog" 
+    model: "hello-world-feature-test" 
+    attributes: 
+      - value: template-alpha 
+        key: name
+      - value: the description
+        key: description
+      - value: pwd
+        key: command
