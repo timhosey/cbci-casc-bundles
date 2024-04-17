@@ -27,5 +27,5 @@ globalCloudBeesPipelineTemplateCatalog:
   - branchOrTag: "main"
     scm:
       git:
-        remote: "git@github.com:timhosey/pipeline-template-catalog-example.git"
+        remote: "https://github.com/timhosey/pipeline-template-catalog-example.git"
     updateInterval: "1d"
