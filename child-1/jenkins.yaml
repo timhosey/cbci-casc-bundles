@@ -1,0 +1,31 @@
+jenkins:
+  systemMessage: |-
+    ${controller_word} ${controller_child} #${controller_number}:
+    Jenkins configured using CasC Child Inheritance
+unclassified:
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+  cloudBeesSCMReporting:
+    enabled: true
+  experimentalPlugins:
+    enabled: false
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+    useTls: false
+  pollSCM:
+    pollingThreadCount: 10
+  usageStatisticsCloudBees:
+    disabledJenkinsUsageStatistics: true
+    usageStatisticsCollected: false
+globalCloudBeesPipelineTemplateCatalog: 
+  catalogs:
+  - branchOrTag: "main"
+    scm:
+      git:
+        remote: "git@github.com:timhosey/pipeline-template-catalog-example.git"
+    updateInterval: "1d"

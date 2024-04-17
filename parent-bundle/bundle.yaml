@@ -1,0 +1,19 @@
+apiVersion: "1"
+id: "parent-bundle"
+description: "Parent Bundle"
+version: "1"
+plugins:
+  - "plugins.yaml"
+jcasc:
+  - "jenkins.yaml"
+#items:
+#  - "items.yaml"
+# Commenting out RBAC since we're not using for this demo
+#rbac:
+#  - "rbac.yaml"
+# Commenting out Catalog since we're not using for this demo
+catalog:
+  - "plugin-catalog.yaml"
+  - "plugin-catalog-delta.yaml"
+variables:
+  - "variables.yaml"
