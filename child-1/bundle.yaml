@@ -1,4 +1,4 @@
-apiVersion: "1"
+apiVersion: 2
 id: "child-1"
 description: "Child-1 CasC Setup"
 version: "1"

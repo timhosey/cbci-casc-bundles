@@ -1,9 +1,0 @@
-type: "plugin-catalog"
-version: "1" 
-name: "chucknorris-catalog"
-displayName: "Plugin Catalog for Parent"
-configurations:
-  - description: "Chuck Norris"
-    includePlugins:
-      chucknorris:
-        version: "159.vdfe649cb_9c37" 
