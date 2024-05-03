@@ -3,8 +3,6 @@ id: "child-1"
 description: "Child-1 CasC Setup"
 version: "1"
 parent: "parent-bundle"
-itemRemoveStrategy:
-  items: none
 plugins:
   - "plugins.yaml"
 jcasc:
