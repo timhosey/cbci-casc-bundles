@@ -5,8 +5,8 @@ version: "1"
 parent: "parent-bundle"
 plugins:
   - "plugins.yaml"
-catalog:
-  - "plugin-catalog.yaml"
+# catalog:
+#   - "plugin-catalog.yaml"
 jcasc:
   - "jenkins.yaml"
 items:
