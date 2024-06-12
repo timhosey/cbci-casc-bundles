@@ -3,7 +3,6 @@ plugins:
   - id: apache-httpcomponents-client-4-api
   - id: authentication-tokens
   - id: aws-credentials
-  - id: blueocean-commons
   - id: bouncycastle-api
   - id: branch-api
   - id: caffeine-api
@@ -11,7 +10,6 @@ plugins:
   - id: cloudbees-administrative-monitors
   - id: cloudbees-analytics
   - id: cloudbees-assurance
-  - id: cloudbees-blueocean-default-theme
   - id: cloudbees-casc-items-controller
   - id: cloudbees-folder
   - id: cloudbees-folders-plus
@@ -87,7 +85,6 @@ plugins:
   - id: pipeline-rest-api
   - id: pipeline-stage-step
   - id: pipeline-stage-tags-metadata
-  - id: pipeline-stage-view
   - id: plain-credentials
   - id: plugin-util-api
   - id: scm-api
