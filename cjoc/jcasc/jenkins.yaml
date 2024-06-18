@@ -1,0 +1,130 @@
+jenkins:
+  authorizationStrategy: "cloudBeesRoleBasedAccessControl"
+  numExecutors: 1
+  securityRealm:
+    local:
+      users:
+        - id: "tim"
+          name: "Tim Hosey"
+          password: ${decodeBase64:${adminPassword}}
+          properties:
+            - blueSteelRedirectOptOutProperty:
+                optOut: true
+            - mailer:
+                emailAddress: "thosey@cloudbees.com"
+        - id: "orange"
+          name: "Orange Demo"
+          password: ${decodeBase64:${demoPassword}}
+          properties:
+            - blueSteelRedirectOptOutProperty:
+                optOut: true
+            - mailer:
+                emailAddress: "thosey+orange@cloudbees.com"
+        - id: "purple"
+          name: "Purple Demo"
+          password: ${decodeBase64:${demoPassword}}
+          properties:
+            - blueSteelRedirectOptOutProperty:
+                optOut: true
+            - mailer:
+                emailAddress: "thosey+purple@cloudbees.com"
+  primaryView:
+    masters:
+      jobFilters:
+        - "connectedMasterViewFilter"
+      name: "Controllers"
+      recurse: true
+  views:
+    - all:
+        name: "all"
+    - masters:
+        jobFilters:
+          - "connectedMasterViewFilter"
+        name: "Controllers"
+        recurse: true
+
+beekeeper:
+  enabled: true
+  securityWarnings:
+    enabledForCore: true
+    enabledForPlugins: true
+  upgrades:
+    autoDowngradePlugins: false
+    autoUpgradePlugins: false
+
+cloudBeesCasCServer:
+  defaultBundle: "main/default-global"
+  disableRemoteValidation: false
+  visibility: true
+
+notificationConfiguration:
+  enabled: true
+  router: operationsCenter
+
+security:
+  anonymizeSupportBundle:
+    enabled: false
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "acceptFirstConnectionStrategy"
+
+tool:
+  cloudbeesPluginUsageAnalyzer:
+    enabled: true
+
+# license:
+#   certificate: ${licenseCert}
+#   key: ${licenseKey}
+
+support:
+  automatedBundleConfiguration:
+    enabled: false
+
+unclassified:
+  bundleStorageService:
+    activated: true
+    bundles:
+      - name: "CBCI CasC Bundles"
+        retriever:
+          SCM:
+            defaultVersion: "main"
+            scmSource:
+              git:
+                remote: "https://github.com/timhosey/cbci-casc-bundles.git"
+                traits:
+                  - "gitBranchDiscovery"
+    pollingPeriod: 120
+    purgeOnDeactivation: true
+  bundleUpdateTiming:
+    automaticReload: true
+  cascAutoControllerProvisioning:
+    provisionControllerOnCreation: false
+    fireAndForget: true
+  cloudbeesPlatform:
+    url: "https://cd.tim.ps.beescloud.com/"
+  gitHubPluginConfig:
+    configs:
+      - credentialsId: "github-token"
+        name: "GitHub"
+    hookUrl: "$JENKINS_BASE_URL/github-webhook/"
+  usageStatisticsCloudBees:
+    disabledJenkinsUsageStatistics: true
+    usageStatisticsCollected: false
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - basicSSHUserPrivateKey:
+              id: "github-key"
+              privateKeySource:
+                directEntry:
+                  privateKey: ${githubKey}
+              scope: GLOBAL
+              username: "github-key"
+              usernameSecret: true
+          - string:
+              id: "github-token"
+              scope: GLOBAL
+              secret: ${githubToken}
+        domain:
+          name: "CasC"
