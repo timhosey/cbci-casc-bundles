@@ -50,7 +50,7 @@ items:
     kubernetes:
       allowExternalAgents: false
       terminationGracePeriodSeconds: 1200
-      memory: 1024
+      memory: 2048
       fsGroup: '1000'
       cpus: 1.0
       readinessTimeoutSeconds: 5
