@@ -1,2 +1,3 @@
 plugins:
-  - id: beer
+  - id: metrics
+#  - id: beer
