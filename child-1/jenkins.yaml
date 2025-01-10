@@ -2,6 +2,12 @@ jenkins:
   systemMessage: |-
     ${controller_word} ${controller_child} #${controller_number}:
     Jenkins configured using CasC Child Inheritance
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      name: "temp-cloud"
+      webSocket: true
 unclassified:
   buildDiscarders:
     configuredBuildDiscarders:
