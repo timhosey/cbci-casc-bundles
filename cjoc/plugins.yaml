@@ -88,7 +88,7 @@ plugins:
   - id: okhttp-api
   - id: operations-center-agent
   - id: operations-center-clusterops
-  - id: operations-center-context
+ # - id: operations-center-context
   - id: operations-center-elasticsearch-provider
   - id: operations-center-jnlp-controller
   - id: operations-center-kubernetes-cloud
