@@ -2,3 +2,4 @@ plugins:
   - id: metrics
     url: https://updates.jenkins.io/download/plugins/metrics/4.2.21-451.vd51df8df52ec/metrics.hpi
   - id: beer
+  - id: chucknorris
