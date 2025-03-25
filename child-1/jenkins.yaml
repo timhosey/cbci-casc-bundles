@@ -8,6 +8,11 @@ jenkins:
       containerCapStr: "10"
       name: "temp-cloud"
       webSocket: true
+  proxy:
+    name: "htp://123.abc"
+    port: 123
+    secretPassword: ${webproxypass}
+    userName: "test"
 unclassified:
   buildDiscarders:
     configuredBuildDiscarders:
