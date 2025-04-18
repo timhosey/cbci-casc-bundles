@@ -1,65 +1,149 @@
 removeStrategy:
-  items: "none"
-  rbac: "sync"
+  rbac: SYNC
+  items: NONE
 items:
-  - kind: "pipeline"
-    name: "pipeline_test"
-    concurrentBuild: true
-    definition:
-      cpsFlowDefinition:
-        sandbox: true
-        script: |
-          pipeline {
-              agent {
-                  kubernetes {
-                      yaml '''
-          apiVersion: v1
-          kind: Pod
-          spec:
-            containers:
-            - name: "python"
-              image: "jenkins/jnlp-agent-python"
-              tty: true
-              command:
-              - cat
-          '''
-                      defaultContainer 'python'
-                  }
-              }
+- kind: pipeline
+  name: dotnet-build
+  concurrentBuild: true
+  definition:
+    cpsScmFlowDefinition:
+      scriptPath: dotnet-build.Jenkinsfile
+      scm:
+        scmGit:
+          userRemoteConfigs:
+          - userRemoteConfig:
+              credentialsId: github-key
+              url: git@github.com:timhosey/jenkinsfiles.git
+          branches:
+          - branchSpec:
+              name: '*/main'
+      lightweight: true
+  description: ''
+  disabled: false
+  displayName: dotnet-build
+  resumeBlocked: false
+- kind: cloudbeesTemplatedJob
+  catalog: timPlateCatalog
+  name: hello-world-test
+  model: timPlateCatalog/hello-world-feature-test
+  attributes:
+  - type: string
+    value: null
+    key: targetName
+  - type: string
+    value: hello-world-test
+    key: name
+  - type: string
+    value: null
+    key: sleepTime
+- kind: pipeline
+  name: maven-build
+  concurrentBuild: true
+  definition:
+    cpsScmFlowDefinition:
+      scriptPath: maven-build.Jenkinsfile
+      scm:
+        scmGit:
+          userRemoteConfigs:
+          - userRemoteConfig:
+              credentialsId: github-key
+              url: git@github.com:timhosey/jenkinsfiles.git
+          branches:
+          - branchSpec:
+              name: '*/main'
+      lightweight: true
+  description: ''
+  disabled: false
+  displayName: maven-build
+  resumeBlocked: false
+- kind: pipeline
+  name: parallel-build
+  concurrentBuild: true
+  definition:
+    cpsScmFlowDefinition:
+      scriptPath: parallel.Jenkinsfile
+      scm:
+        scmGit:
+          userRemoteConfigs:
+          - userRemoteConfig:
+              credentialsId: github-key
+              url: git@github.com:timhosey/jenkinsfiles.git
+          branches:
+          - branchSpec:
+              name: '*/main'
+      lightweight: true
+  description: ''
+  disabled: false
+  displayName: parallel-build
+  resumeBlocked: false
+- kind: pipeline
+  name: pipeline_test
+  concurrentBuild: true
+  definition:
+    cpsFlowDefinition:
+      sandbox: true
+      script: |
+        pipeline {
+            agent {
+                kubernetes {
+                    yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: "python"
+            image: "jenkins/jnlp-agent-python"
+            tty: true
+            command:
+            - cat
+        '''
+                    defaultContainer 'python'
+                }
+            }
 
-              stages {
-                  stage('Environment') {
-                      steps {
-                          echo 'Printing environment variables for ${controller_word} ${controller_child} #${controller_number}'
-                          sh 'python --version'
-                          sh 'env'
-                      }
-                  }
-              }
-          }
-    description: "A test pipeline"
-    disabled: false
-    displayName: "Pipeline Test"
-    resumeBlocked: false
-  - kind: "cloudbeesTemplatedJob"
-    name: "hello-world-test"
-    catalog: "timPlateCatalog" 
-    model: "hello-world-feature-test" 
-    attributes: 
-      - value: template-alpha 
-        key: name
-      - value: the description
-        key: description
-      - value: pwd
-        key: command
-  - kind: "folder"
-    name: project-alpha
-    displayName: "Project Alpha"
-    description: "Project Alpha is going to change the world!"
-    groups:
-      - name: "Project Alpha Developers"
-        members:
-          external_groups:
-            - developer
-        roles:
-          - name: "developer"
+            stages {
+                stage('Environment') {
+                    steps {
+                        echo 'Printing environment variables for ^${controller_word} ^${controller_child} #^${controller_number}'
+                        sh 'python --version'
+                        sh 'env'
+                    }
+                }
+            }
+        }
+  description: A test pipeline
+  disabled: false
+  displayName: Pipeline Test
+  resumeBlocked: false
+- kind: folder
+  name: project-alpha
+  description: Project Alpha is going to change the world!
+  displayName: Project Alpha
+  groups:
+  - members:
+      unknown:
+      - developer
+    roles:
+    - name: developer
+      grantedAt: current
+    name: Project Alpha Developers
+- kind: pipeline
+  name: sleep-build
+  concurrentBuild: true
+  definition:
+    cpsScmFlowDefinition:
+      scriptPath: sleep.Jenkinsfile
+      scm:
+        scmGit:
+          userRemoteConfigs:
+          - userRemoteConfig:
+              credentialsId: github-key
+              url: git@github.com:timhosey/jenkinsfiles.git
+          branches:
+          - branchSpec:
+              name: '*/main'
+      lightweight: true
+  description: ''
+  disabled: false
+  displayName: sleep-build
+  resumeBlocked: false
