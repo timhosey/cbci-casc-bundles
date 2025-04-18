@@ -50,6 +50,8 @@ security:
     usageStatisticsEnabled: true
   sSHD:
     port: -1
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "noHostKeyVerificationStrategy"
 # unclassified:
   
 tool:
